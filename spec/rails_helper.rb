@@ -2,7 +2,7 @@
 require 'spec_helper'
 require 'capybara/rspec'
 require 'webmock/rspec'
-
+require 'support/controller_helpers'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
@@ -50,6 +50,8 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
+  config.include FactoryBot::Syntax::Methods
+  config.include Devise::Test::ControllerHelpers, type: :controller
   # Run before your test start
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction

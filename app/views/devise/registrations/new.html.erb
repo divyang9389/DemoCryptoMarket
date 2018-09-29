@@ -1,0 +1,17 @@
+<%= form_for resource, as: resource_name, url: registration_path(resource_name), html: {class: "form-signin"} do |f| %>
+  <%= f.label :email, class: "float-left" %>
+  <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "Email Address" %>
+  <span class="text-danger"><%= resource.errors.messages[:email].join(' ')%></span><br/>
+  <%= f.label :password, class: "float-left" %>
+  <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+  <% end %>
+  <%= f.password_field :password, autocomplete: "new-password", class: "form-control", placeholder: "Enter Password" %>
+  <span class="text-danger"><%= resource.errors.messages[:password].join(' ')%></span><br/>
+  <%= f.label :password_confirmation, class: "float-left" %>
+  <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", placeholder: "Enter confirm Password" %>
+  <span class="text-danger"><%= resource.errors.messages[:password_confirmation].join(' ')%></span>
+  <%= f.submit "Register", class: "btn btn-lg btn-primary btn-block" %>
+  <%= render "devise/shared/links" %>
+<% end %>
+
