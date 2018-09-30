@@ -1,0 +1,33 @@
+<div class="pricing-header mx-auto text-center">
+  <h1 class="display-4">Currency List</h1>
+</div>
+<div class="container">
+  <div class="card-deck mb-3 text-center">
+    <% if @response["data"] %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Currency Code</th>
+            <th scope="col">Currency Name</th>
+            <th scope="col">Market Cap</th>
+            <th scope="col">Value (in USD)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @response["data"].each_with_index do |currency_data, index| %>
+          <tr>
+            <%= page_index(index) %>
+            <td><%= currency_data["symbol"] %></td>
+            <td><%= currency_data["name"] %></td>
+            <td><%= currency_data["quote"]["USD"]["market_cap"] %></td>
+            <td><%= currency_data["quote"]["USD"]["price"] %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p class="error text-center"><%= @response["status"]["error_message"] %></p>
+    <% end %>
+  </div>
+</div>
